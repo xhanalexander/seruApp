@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seruapp/view/first_screen.dart';
+import 'package:seruapp/view/screen/first_screen.dart';
+import 'package:seruapp/view/screen/second_screen.dart';
 
 class MainForm extends StatefulWidget {
   const MainForm({super.key});
@@ -13,6 +14,7 @@ class _MainFormState extends State<MainForm> {
 
   List<Step> steps() => [
     Step(
+      // state: _index >= 0 ? StepState.complete : StepState.disabled,
       isActive: _index >= 0,
       title: const Text('Step 1'),
       content: const FormScreen()
@@ -20,7 +22,7 @@ class _MainFormState extends State<MainForm> {
     Step(
       isActive: _index >= 1,
       title: const Text('Step 2'),
-      content: Text('Content 2'),
+      content: const FormScreenSecond()
     ),
     Step(
       isActive: _index >= 2,
@@ -37,20 +39,15 @@ class _MainFormState extends State<MainForm> {
       ),
       body: Stepper(
         type: StepperType.horizontal,
+        physics: const AlwaysScrollableScrollPhysics(),
+        controlsBuilder: (context, details) => Container(),
         currentStep: _index,
         steps: steps(),
+        onStepTapped: (index) => setState(() => _index = index),
+        elevation: 1,
         onStepContinue: () {
           if (_index < steps().length - 1) {
-            setState(() {
-              _index++;
-            });
-          }
-        },
-        onStepCancel: () {
-          if (_index > 0) {
-            setState(() {
-              _index--;
-            });
+            setState(() => _index++);
           }
         },
       )

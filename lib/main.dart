@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seruapp/view/app.dart';
+import 'package:seruapp/app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future main() async {

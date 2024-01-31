@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FormName extends StatelessWidget {
   final String hintTextName;
@@ -20,14 +21,10 @@ class FormName extends StatelessWidget {
       keyboardType: TextInputType.name,
       onChanged: onChanged,
       decoration: InputDecoration(
-        isDense: true,
-        filled: true,
-        fillColor: Colors.grey[200],
         contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
         hintText: hintTextName,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -90,16 +87,38 @@ class FormDropDown extends StatelessWidget {
         );
       }).toList(),
       decoration: InputDecoration(
-        isDense: true,
-        filled: true,
-        fillColor: Colors.grey[200],
         contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
         hintText: hintText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+}
+
+class TextAreaForm extends StatelessWidget {
+  final TextEditingController textController;
+
+  const TextAreaForm({
+    super.key,
+    required this.textController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLines: 4,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(200)
+      ],
+      controller: textController,
+      decoration: InputDecoration(
+        hintText: "...",
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
