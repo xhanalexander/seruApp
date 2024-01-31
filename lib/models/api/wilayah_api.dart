@@ -1,36 +1,43 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:seruapp/constant/const.dart';
+import 'package:seruapp/models/kota_model.dart';
+import 'package:seruapp/models/kecamatan_model.dart';
 import 'package:seruapp/models/provinsi_model.dart';
 
 class IndonesiaAreaAPI {
-  final String apiUrls = dotenv.env['WEBS']!;
-  final Dio fetch = Dio();
+  final Dio dios = Dio();
+  final urls = ConstValue().province;
 
   Future<List<Provinsi>> getProvinsi() async {
     try {
-      final response = await fetch.get('$apiUrls/provinces.json');
-      final datas = response.data as Map<String, dynamic>;
-      debugPrint('datas: $datas');
-      // final list = datas.entries.map((e) => Provinsi.fromJson(e.value)).toList();
-      // debugPrint('list: $list');
-      return datas.entries.map((e) => Provinsi.fromJson(e.value)).toList();
+      final response = await dios.get('${urls}provinces.json');
+      final result = response.data as List<dynamic>;
+      final list = result.map((e) => Provinsi.fromJson(e)).toList();
+      return list;
     } catch (e) {
-      rethrow;
+      throw Exception('not Founds: $e');
     }
   }
 
-  Future<List<dynamic>> getKota(String id) async {
+  Future<List<Kota>> getKota(String id) async {
     try {
-      final response = await fetch.get('$apiUrls/regencies/$id.json');
-      final datas = response.data as Map<String, dynamic>;
-      debugPrint('datas: $datas');
-      // final list = datas.entries.map((e) => Provinsi.fromJson(e.value)).toList();
-      // debugPrint('list: $list');
-      return datas.entries.map((e) => Provinsi.fromJson(e.value)).toList();
+      final response = await dios.get('${urls}regencies/$id.json');
+      final result = response.data as List<dynamic>;
+      final list = result.map((e) => Kota.fromJson(e)).toList();
+      return list;
     } catch (e) {
-      rethrow;
+      throw Exception('not Founds: $e');
     }
   }
-  
+
+  Future<List<Kecamatan>> getKecamatan(String id) async {
+    try {
+      final response = await dios.get('${urls}districts/$id.json');
+      final result = response.data as List<dynamic>;
+      final list = result.map((e) => Kecamatan.fromJson(e)).toList();
+      return list;
+    } catch (e) {
+      throw Exception('not Founds: $e');
+    }
+  }
 }

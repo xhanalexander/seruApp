@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seruapp/view/screen/first_screen.dart';
-import 'package:seruapp/view/screen/second_screen.dart';
+import 'package:seruapp/view/sub_form/first_screen.dart';
+import 'package:seruapp/view/sub_form/second_screen.dart';
 
 class MainForm extends StatefulWidget {
   const MainForm({super.key});
@@ -14,7 +14,6 @@ class _MainFormState extends State<MainForm> {
 
   List<Step> steps() => [
     Step(
-      // state: _index >= 0 ? StepState.complete : StepState.disabled,
       isActive: _index >= 0,
       title: const Text('Step 1'),
       content: const FormScreen()

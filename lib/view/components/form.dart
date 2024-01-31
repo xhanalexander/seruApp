@@ -5,19 +5,21 @@ class FormName extends StatelessWidget {
   final String hintTextName;
   final TextEditingController controllerNames;
   final Function(String) onChanged;
+  final String? Function(String?)? validator;
 
   const FormName({
     super.key,
     required this.hintTextName,
     required this.controllerNames,  
     required this.onChanged,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controllerNames,
-      // validator: (value) => FormValidator.validateUsername(username: value),
+      validator: validator,
       keyboardType: TextInputType.name,
       onChanged: onChanged,
       decoration: InputDecoration(
@@ -102,16 +104,19 @@ class FormDropDown extends StatelessWidget {
 
 class TextAreaForm extends StatelessWidget {
   final TextEditingController textController;
+  final String? Function(String?)? validator;
 
   const TextAreaForm({
     super.key,
     required this.textController,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: 4,
+      validator: validator,
       inputFormatters: [
         LengthLimitingTextInputFormatter(200)
       ],

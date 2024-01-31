@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:seruapp/components/form.dart';
+import 'package:seruapp/view/components/form.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:seruapp/view/full_view_screen.dart';
+import 'package:seruapp/view/components/full_image_view.dart';
 
 class FormScreenSecond extends StatefulWidget {
   const FormScreenSecond({super.key});

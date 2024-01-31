@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seruapp/view/form_screen.dart';
-import 'package:seruapp/viewModels/provinsi_view_models.dart';
+import 'package:seruapp/view/form_view.dart';
+import 'package:seruapp/view_models/wilayah_view_models.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ProvinsiViewModel()),
+        ChangeNotifierProvider(create: (_) => WilayahViewModels()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
