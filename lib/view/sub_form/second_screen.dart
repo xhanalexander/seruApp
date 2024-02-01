@@ -120,7 +120,9 @@ class _FormScreenSecondState extends State<FormScreenSecond> {
               childs: const Text("Save", style: TextStyle(color: Colors.white, fontSize: 18)),
               onPressed: () {
                 if (_formKeys.currentState!.validate()) {
-                  debugPrint("Validated");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
                 }
               },
             ),

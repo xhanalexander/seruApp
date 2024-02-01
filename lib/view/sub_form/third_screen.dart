@@ -12,6 +12,13 @@ class FormScreenThird extends StatefulWidget {
 
 class _FormScrenThiredState extends State<FormScreenThird> {
   late SharedPreferences prefs;
+
+  late String firstName = '';
+  late String lastName = '';
+  late String bio = '';
+  late String province = '';
+  late String city = '';
+  late String address = '';
   
   @override
   void initState() {
@@ -25,9 +32,72 @@ class _FormScrenThiredState extends State<FormScreenThird> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const LabelForm(
-            labels: 'Data Confirmation',
+          const Align(
+            alignment: Alignment.center,
+            child: LabelForm(
+              labels: 'Data Confirmation',
+            ),
           ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'First Name',
+          ),
+          Text(
+            firstName,
+            style: const TextStyle(fontSize: 18),
+          ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'Last Name',
+          ),
+          Text(
+            lastName,
+            style: const TextStyle(fontSize: 18),
+          ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'Bio',
+          ),
+          Text(
+            bio,
+            style: const TextStyle(fontSize: 18),
+          ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'Province',
+          ),
+          Text(
+            province,
+            style: const TextStyle(fontSize: 18),
+          ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'City',
+          ),
+          Text(
+            city,
+            style: const TextStyle(fontSize: 18),
+          ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'Address',
+          ),
+          Text(
+            address,
+            style: const TextStyle(fontSize: 18),
+          ),
+
+          const SizedBox(height: 20),
+          const LabelForm(
+            labels: 'Picture',
+          ),
+          
 
           FormButton(
             onPressed: () {},
