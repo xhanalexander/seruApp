@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class FormName extends StatelessWidget {
+class NameForm extends StatelessWidget {
   final String hintTextName;
   final TextEditingController controllerNames;
   final Function(String) onChanged;
   final String? Function(String?)? validator;
 
-  const FormName({
+  const NameForm({
     super.key,
     required this.hintTextName,
     required this.controllerNames,  
@@ -39,9 +39,9 @@ class FormName extends StatelessWidget {
   }
 }
 
-class FormLabel extends StatelessWidget {
+class LabelForm extends StatelessWidget {
   final String labels;
-  const FormLabel({
+  const LabelForm({
     super.key,
     required this.labels
   });
@@ -63,13 +63,13 @@ class FormLabel extends StatelessWidget {
   }
 }
 
-class FormDropDown extends StatelessWidget {
+class DropDownForm extends StatelessWidget {
   final String hintText;
   final List<String> options;
   final String selectedValue;
   final Function(String?) onChanged;
 
-  const FormDropDown({
+  const DropDownForm({
     super.key,
     required this.hintText,
     required this.options,

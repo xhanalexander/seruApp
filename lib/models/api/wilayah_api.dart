@@ -6,7 +6,7 @@ import 'package:seruapp/models/provinsi_model.dart';
 
 class IndonesiaAreaAPI {
   final Dio dios = Dio();
-  final urls = ConstValue().province;
+  final urls = ConstValue().webApis;
 
   Future<List<Provinsi>> getProvinsi() async {
     try {

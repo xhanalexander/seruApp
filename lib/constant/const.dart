@@ -1,6 +1,6 @@
 
 class ConstValue {
-  final String province = "https://www.emsifa.com/api-wilayah-indonesia/api/";
+  final String webApis = "https://www.emsifa.com/api-wilayah-indonesia/api/";
 }
 
 class FormValidation {

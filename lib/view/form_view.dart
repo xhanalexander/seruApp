@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seruapp/view/sub_form/first_screen.dart';
 import 'package:seruapp/view/sub_form/second_screen.dart';
+import 'package:seruapp/view/sub_form/third_screen.dart';
 
 class MainForm extends StatefulWidget {
   const MainForm({super.key});
@@ -26,7 +27,7 @@ class _MainFormState extends State<MainForm> {
     Step(
       isActive: _index >= 2,
       title: const Text('Step 3'),
-      content: Text('Content 3'),
+      content: const FormScreenThird()
     ),
   ];
 

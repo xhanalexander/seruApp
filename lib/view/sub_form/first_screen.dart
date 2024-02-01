@@ -5,6 +5,7 @@ import 'package:seruapp/view/components/form.dart';
 import 'package:seruapp/view/components/button.dart'; 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:seruapp/view_models/wilayah_view_models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -14,10 +15,14 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
+  late SharedPreferences prefs;
   final formKey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final bioDataController = TextEditingController();
+  String? selectedProvinsi = "ACEH";
+  String? selectedKota = "KOTA JAKARTA PUSAT";
+  String? selectedKecamatan = "TANAH ABANG";
 
   @override
   void dispose() {
@@ -37,6 +42,29 @@ class _FormScreenState extends State<FormScreen> {
     });
   }
 
+  void submit() async {
+    if (formKey.currentState!.validate()) {
+      final prefs = await SharedPreferences.getInstance();
+      
+      prefs.setString('first', firstNameController.text);
+      prefs.setString('last', lastNameController.text);
+      prefs.setString('bio', bioDataController.text);
+      prefs.setString('provinsi', selectedProvinsi!);
+      prefs.setString('kota', selectedKota!);
+      prefs.setString('kecamatan', selectedKecamatan!);
+
+      Map<String, dynamic> formdata = {
+        "first_name": firstNameController.text,
+        "last_name": lastNameController.text,
+        "bio_data": bioDataController.text,
+        "provinsi": selectedProvinsi,
+        "kota": selectedKota,
+        "kecamatan": selectedKecamatan,
+      };
+      debugPrint(formdata.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final props = Provider.of<WilayahViewModels>(context);
@@ -47,11 +75,18 @@ class _FormScreenState extends State<FormScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+            const Align(
+              alignment: Alignment.center,
+              child: LabelForm(
+                labels: 'Please fill out the form below',
+              ),
+            ),
             
-            const FormLabel(
+            const LabelForm(
               labels: 'First Name',
             ),
-            FormName(
+            NameForm(
               hintTextName: 'John',
               controllerNames: firstNameController,
               validator: (value) => FormValidation().validateFirstName(value!),
@@ -59,10 +94,10 @@ class _FormScreenState extends State<FormScreen> {
             ),
 
             const SizedBox(height: 20),
-            const FormLabel(
+            const LabelForm(
               labels: 'Last Name',
             ),
-            FormName(
+            NameForm(
               hintTextName: 'Smith',
               controllerNames: lastNameController,
               validator: (value) => FormValidation().validateLastName(value!),
@@ -71,13 +106,15 @@ class _FormScreenState extends State<FormScreen> {
 
             // Provinces
             const SizedBox(height: 20),
-            const FormLabel(labels: "Provinces"),
+            const LabelForm(labels: "Provinces"),
             DropdownSearch(
               popupProps: const PopupProps.menu(
                 showSearchBox: true,
               ),
-              onChanged: (value) => debugPrint(value),
-              selectedItem: "ACEH",
+              onChanged: (value) => setState(() {
+                selectedProvinsi = value;
+              }),
+              selectedItem: selectedProvinsi,
               asyncItems: (String value) => Future.delayed(
                 const Duration(milliseconds: 500),
                 () => props.provinsi.map((e) => e.name!).toList(),
@@ -86,13 +123,16 @@ class _FormScreenState extends State<FormScreen> {
 
             // City
             const SizedBox(height: 20),
-            const FormLabel(labels: "City"),
+            const LabelForm(labels: "City"),
             DropdownSearch(
               popupProps: const PopupProps.menu(
                 showSearchBox: true,
               ),
-              onChanged: (value) => debugPrint(value),
-              selectedItem: "KOTA JAKARTA PUSAT",
+              
+              onChanged: (value) => setState(() {
+                selectedKota = value;
+              }),
+              selectedItem: selectedKota,
               asyncItems: (String value) => Future.delayed(
                 const Duration(milliseconds: 500),
                 () => props.kota.map((e) => e.name!).toList(),
@@ -101,13 +141,15 @@ class _FormScreenState extends State<FormScreen> {
 
             // Address
             const SizedBox(height: 20),
-            const FormLabel(labels: "Address"),
+            const LabelForm(labels: "Address"),
             DropdownSearch(
               popupProps: const PopupProps.menu(
                 showSearchBox: true,
               ),
-              onChanged: (value) => debugPrint(value),
-              selectedItem: "TANAH ABANG",
+              onChanged: (value) => setState(() {
+                selectedKecamatan = value;
+              }),
+              selectedItem: selectedKecamatan,
               asyncItems: (String value) => Future.delayed(
                 const Duration(milliseconds: 500),
                 () => props.kecamatan.map((e) => e.name!).toList(),
@@ -116,7 +158,7 @@ class _FormScreenState extends State<FormScreen> {
 
             // Biodata
             const SizedBox(height: 20),
-            const FormLabel(labels: "Biodata"),
+            const LabelForm(labels: "Biodata"),
             TextAreaForm(
               textController: bioDataController,
               validator: (value) => FormValidation().validateEmpty(value!),
@@ -125,10 +167,10 @@ class _FormScreenState extends State<FormScreen> {
             // Button
             const SizedBox(height: 20),
             FormButton(
-              childs: const Text("Submit", style: TextStyle(color: Colors.white, fontSize: 18)),
+              childs: const Text("Save", style: TextStyle(color: Colors.white, fontSize: 18)),
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  debugPrint("Validated");
+                  submit();
                 }
               },
             ),

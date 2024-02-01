@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:seruapp/view/components/button.dart';
 import 'package:seruapp/view/components/form.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seruapp/view/components/full_image_view.dart';
@@ -37,7 +38,7 @@ class _FormScreenSecondState extends State<FormScreenSecond> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            const FormLabel(labels: 'Upload Photo ID'),
+            const LabelForm(labels: 'Upload Photo ID'),
             const SizedBox(height: 10),
             Center(
               child: GestureDetector(
@@ -110,6 +111,18 @@ class _FormScreenSecondState extends State<FormScreenSecond> {
                       ),
                 ),
               ),
+            ),
+            const SizedBox(height: 20),
+
+            // Button
+            const SizedBox(height: 20),
+            FormButton(
+              childs: const Text("Save", style: TextStyle(color: Colors.white, fontSize: 18)),
+              onPressed: () {
+                if (_formKeys.currentState!.validate()) {
+                  debugPrint("Validated");
+                }
+              },
             ),
             const SizedBox(height: 20),
           ],
