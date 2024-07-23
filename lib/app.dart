@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seruapp/view/form_view.dart';
+import 'package:seruapp/view/dashboard_view.dart';
 import 'package:seruapp/view_models/wilayah_view_models.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
+          brightness: Brightness.dark,
         ),
-        home: const MainForm(),
+        home: const DasboardView(),
       ),
     );
   }
